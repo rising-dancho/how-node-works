@@ -38,29 +38,56 @@ fs.readFile('./test-file.txt', 'utf8', () => {
 
   process.nextTick(() => console.log('Process.nextTick() '));
 
-  crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', (err, data) =>
-    console.log(
-      convertToHumanReadableTime(Date.now() - start),
-      'password: encrypted'
-    )
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
+  //                           async version                       //
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
+  // crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', () =>
+  //   console.log(
+  //     convertToHumanReadableTime(Date.now() - start),
+  //     'password: encrypted'
+  //   )
+  // );
+  // crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', () =>
+  //   console.log(
+  //     convertToHumanReadableTime(Date.now() - start),
+  //     'password: encrypted'
+  //   )
+  // );
+  // crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', () =>
+  //   console.log(
+  //     convertToHumanReadableTime(Date.now() - start),
+  //     'password: encrypted'
+  //   )
+  // );
+  // crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', () =>
+  //   console.log(
+  //     convertToHumanReadableTime(Date.now() - start),
+  //     'password: encrypted'
+  //   )
+  // );
+
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
+  //                           sync version                        //
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
+  crypto.pbkdf2Sync('password', 'salat', 100000, 1024, 'sha512');
+  console.log(
+    convertToHumanReadableTime(Date.now() - start),
+    'password: encrypted'
   );
-  crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', (err, data) =>
-    console.log(
-      convertToHumanReadableTime(Date.now() - start),
-      'password: encrypted'
-    )
+  crypto.pbkdf2Sync('password', 'salat', 100000, 1024, 'sha512');
+  console.log(
+    convertToHumanReadableTime(Date.now() - start),
+    'password: encrypted'
   );
-  crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', (err, data) =>
-    console.log(
-      convertToHumanReadableTime(Date.now() - start),
-      'password: encrypted'
-    )
+  crypto.pbkdf2Sync('password', 'salat', 100000, 1024, 'sha512');
+  console.log(
+    convertToHumanReadableTime(Date.now() - start),
+    'password: encrypted'
   );
-  crypto.pbkdf2('password', 'salat', 100000, 1024, 'sha512', (err, data) =>
-    console.log(
-      convertToHumanReadableTime(Date.now() - start),
-      'password: encrypted'
-    )
+  crypto.pbkdf2Sync('password', 'salat', 100000, 1024, 'sha512');
+  console.log(
+    convertToHumanReadableTime(Date.now() - start),
+    'password: encrypted'
   );
 }); // 4
 
