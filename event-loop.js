@@ -14,29 +14,49 @@ function convertToHumanReadableTime(ms) {
   const readableSeconds = seconds % 60;
   const readableMilliSeconds = ms % 1000; // Corrected to show only the remaining milliseconds
 
-  return `${readableHours}hr ${readableMinutes}min ${readableSeconds}sec ${readableMilliSeconds}ms`;
+  return `TIME ELAPSED: ${readableHours}hr ${readableMinutes}min ${readableSeconds}sec ${readableMilliSeconds}ms //`;
 }
 
-setTimeout(() => console.log('1st setTimeout()'), 0); // 3
-setImmediate(() => console.log('1st setImmediate()')); // 2
+setTimeout(
+  () =>
+    console.log(
+      convertToHumanReadableTime(Date.now() - start),
+      '1st setTimeout()'
+    ),
+  0
+); // 3
+setImmediate(() =>
+  console.log(
+    convertToHumanReadableTime(Date.now() - start),
+    '1st setImmediate()'
+  )
+); // 2
 
 // node event
 fs.readFile('./test-file.txt', 'utf8', () => {
-  console.log('fs.readFile() I/O finished ');
+  console.log(convertToHumanReadableTime(Date.now() - start), ' I/O finished ');
   console.log('-------------------------');
 
   setTimeout(() => console.log('2nd setTimeout()'), 0);
-  setTimeout(
-    () =>
-      console.log(
-        convertToHumanReadableTime(Date.now() - start),
-        '2nd setTimeout()'
-      ),
-    3000
+  setTimeout(() =>
+    console.log(
+      convertToHumanReadableTime(Date.now() - start, '2nd setTimeout()'),
+      3000
+    )
   );
-  setImmediate(() => console.log('setImmediate() ii')); // 2
+  setImmediate(() =>
+    console.log(
+      convertToHumanReadableTime(Date.now() - start),
+      'setImmediate() ii'
+    )
+  ); // 2
 
-  process.nextTick(() => console.log('Process.nextTick() '));
+  process.nextTick(() =>
+    console.log(
+      convertToHumanReadableTime(Date.now() - start),
+      'Process.nextTick() '
+    )
+  );
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
   //                           async version                       //
@@ -91,6 +111,9 @@ fs.readFile('./test-file.txt', 'utf8', () => {
   );
 }); // 4
 
-console.log('Hello from the top-level code'); // 1
+console.log(
+  convertToHumanReadableTime(Date.now() - start),
+  'Hello from top-level code'
+); // 1
 
 // human readable time: https://chatgpt.com/share/bf1bc2ca-2628-492b-99fe-fcf1e0c6d137
